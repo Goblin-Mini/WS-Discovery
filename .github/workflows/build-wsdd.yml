@@ -12,11 +12,11 @@ jobs:
         with:
           python-version: '3.x'
       - uses: android-actions/setup-android@v4
-  with:
-    cmdline-tools-version: 12266719
-    accept-android-sdk-licenses: true
-    packages: |
-      platform-tools
+        with:
+          cmdline-tools-version: '12266719'
+          accept-android-sdk-licenses: true
+          packages: |
+            platform-tools
       - name: Install Android NDK
         run: sdkmanager "ndk;27.2.12479018"
       - name: Build module
