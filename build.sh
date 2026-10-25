@@ -18,10 +18,10 @@ HOST_TAG="linux-x86_64"
 TOOL="$NDK/toolchains/llvm/prebuilt/$HOST_TAG/bin"
 # Build standalone Android/Bionic executables for both ABIs.
 make -C "$WORK/src/wsdd2" clean
-make -C "$WORK/src/wsdd2" -j2 CC="$TOOL/armv7a-linux-androideabi21-clang" CFLAGS='-Wall -Wextra -Os -fPIE' LDFLAGS='-pie' wsdd2
+make -C "$WORK/src/wsdd2" -j2 CC="$TOOL/armv7a-linux-androideabi24-clang" CFLAGS='-Wall -Wextra -Os -fPIE' LDFLAGS='-pie' wsdd2
 cp "$WORK/src/wsdd2/wsdd2" "$WORK/armv7/wsdd2"
 make -C "$WORK/src/wsdd2" clean
-make -C "$WORK/src/wsdd2" -j2 CC="$TOOL/aarch64-linux-android21-clang" CFLAGS='-Wall -Wextra -Os -fPIE' LDFLAGS='-pie' wsdd2
+make -C "$WORK/src/wsdd2" -j2 CC="$TOOL/aarch64-linux-android24-clang" CFLAGS='-Wall -Wextra -Os -fPIE' LDFLAGS='-pie' wsdd2
 cp "$WORK/src/wsdd2/wsdd2" "$WORK/arm64/wsdd2"
 chmod 755 "$WORK/armv7/wsdd2" "$WORK/arm64/wsdd2"
 # Extract and patch the existing module without touching persistent shares or credentials.
