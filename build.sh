@@ -6,6 +6,12 @@ rm -rf "$WORK"
 mkdir -p "$WORK/src" "$WORK/armv7" "$WORK/arm64" "$WORK/module"
 # Obtain wsdd2 source (C implementation, no Python runtime required).
 git clone --depth 1 --branch f-dev https://github.com/fenglichaoHD/wsdd2.git "$WORK/src/wsdd2"
+# Android/Bionic: wsdd2 uses getifaddrs/freeifaddrs but this upstream branch
+# does not include the declaration header, which makes NDK builds fail.
+WSD_SOURCE="$WORK/src/wsdd2/wsdd2.c"
+if ! grep -q '^#include <ifaddrs.h>' "$WSD_SOURCE"; then
+  sed -i '1i #include <ifaddrs.h>' "$WSD_SOURCE"
+fi
 NDK="$ANDROID_HOME/ndk/27.2.12479018"
 [ -d "$NDK" ] || { echo "Android NDK not found: $NDK"; exit 2; }
 HOST_TAG="linux-x86_64"
